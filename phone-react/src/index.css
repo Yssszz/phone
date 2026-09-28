@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+@font-face {
+    font-family: "sf";
+    src: url(../src/assets/SF-Pro-Text-Bold.otf);
+}
+
+@font-face {
+    font-family: "mc";
+    src: url(../src/assets/minecraft_font.ttf);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#root {
+    margin: 0;
+    padding: 0;
+}
