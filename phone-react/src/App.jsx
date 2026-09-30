@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Routes, Route, Navigate } from "react-router";
 import PhoneFrame from "./components/PhoneFrame";
 import StatusBar from "./components/StatusBar";
 import HomeScreen from "./components/HomeScreen";
@@ -12,13 +13,17 @@ import Register from "./pages/Register";
 
 function App() {
     const [activeApp, setActiveApp] = useState(null);
-    
+
     const closeApp = () => setActiveApp(null);
 
     return (
         <PhoneFrame>
             <StatusBar />
-            <Login />
+            <Routes>
+                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+            </Routes>
         </PhoneFrame>
     );
 }

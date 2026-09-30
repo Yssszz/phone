@@ -1,8 +1,11 @@
-import { Stack, Text, Overlay, Group, Divider, Avatar, TextInput, PasswordInput, Button } from "@mantine/core";
+import { Stack, Text, Overlay, Group, Divider, Avatar, TextInput, PasswordInput, Button, Anchor } from "@mantine/core";
 import LiveClock from "../components/LiveClock";
 import { useState } from "react";
+import { Link } from "react-router";
 
 const wallpaper = "https://r2.fivemanage.com/NknkLh3xvdOyH6mjXyCTz/wallpaper.jpg";
+
+const shadow = "0 2px 8px rgba(0,0,0,0.4)";
 
 export default function Login() {
     const [username, setUsername] = useState("");
@@ -13,10 +16,10 @@ export default function Login() {
 
             <Stack gap={0} pos="relative" align="center" justify="center" style={{ flex: 1 }}>
                 {/* Time and date */}
-                <Text fz={80} lh={1}>
+                <Text fz={80} lh={1} style={{ textShadow: shadow }}>
                     <LiveClock />
                 </Text>
-                <Text>
+                <Text style={{ textShadow: shadow }}>
                     <LiveClock format="dddd, MMMM D" />
                 </Text>
 
@@ -35,8 +38,8 @@ export default function Login() {
                     p={15}
                 >
                     <Stack align="center" gap={0} justify="center" p="lg" style={{ flex: 1 }}>
-                        <Text style={{ fontSize: 40 }}>Login</Text>
-                        <Text c="yellow">Lorem</Text>
+                        <Text style={{ fontSize: 40, textShadow: shadow }}>Login</Text>
+                        <Text c="yellow">Sign in to your Account</Text>
                     </Stack>
 
                     <Divider orientation="vertical" color="rgba(255, 255, 255, 0.5)" size="sm" />
@@ -68,10 +71,14 @@ export default function Login() {
                     boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
                 }}
             >
-                <Text>
-                    New player? <b>Register</b>
-                </Text>
-                <Text size="xs">Larper OS v1.0</Text>
+                <Anchor component={Link} to="/register" c="white">
+                    New Player? Register
+                </Anchor>
+
+                <Anchor component={Link} to="/register" c="white">
+                    Demo
+                </Anchor>
+                <Text size="xs">Hello OS v1.0</Text>
             </Group>
         </Stack>
     );
