@@ -5,7 +5,7 @@ import PhoneIcon from "../assets/Phone.png";
 import Styles from "../components/Dock.module.css";
 import Stats from "../assets/Stats.png";
 
-function Dock() {
+function Dock({ onOpenApp }) {
     return (
         <Group
             justify="space-between"
@@ -34,7 +34,7 @@ function Dock() {
 
             <Group gap={12}>
                 <Group>
-                    <Image radius="md" h={30} w={30} src={SettingIcon} fallbackSrc="https://placehold.co/600x400?text=Placeholder" className={Styles.DockIcon} />
+                    <Image radius="md" h={30} w={30} src={SettingIcon} onClick={() => onOpenApp("setting")} fallbackSrc="https://placehold.co/600x400?text=Placeholder" className={Styles.DockIcon} />
                 </Group>
 
                 <Group>

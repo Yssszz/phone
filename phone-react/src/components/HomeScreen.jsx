@@ -9,7 +9,7 @@ import leadBoard from "../assets/leadboard.png";
 import paypal from "../assets/paypal.png";
 import Home from "../assets/Home.png";
 import Hacker from "../assets/hacker.png";
-import Stocks from "../assets/Stocks.png"
+import Stocks from "../assets/Stocks.png";
 
 function HomeScreen({ onOpenApp }) {
     const isMobile = useMediaQuery("(max-width: 768px)");

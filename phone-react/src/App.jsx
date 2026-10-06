@@ -1,28 +1,25 @@
-import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router";
 import PhoneFrame from "./components/PhoneFrame";
-import StatusBar from "./components/StatusBar";
-import HomeScreen from "./components/HomeScreen";
-import Dock from "./components/Dock";
-import VehicleApp from "./apps/VehicleApp";
-import Information from "./apps/Information";
-import HackerApp from "./apps/HackerApp";
-import Stocks from "./apps/Stocks";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Home from "./apps/Home";
+import ProtectRoute from "./components/ProtectRoute";
 
 function App() {
-    const [activeApp, setActiveApp] = useState(null);
-
-    const closeApp = () => setActiveApp(null);
-
     return (
         <PhoneFrame>
-            <StatusBar />
             <Routes>
-                <Route path="/" element={<Navigate to="/login" />} />
+                <Route path="/" element={<Navigate to="/home" />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route
+                    path="/home"
+                    element={
+                        <ProtectRoute>
+                            <Home />
+                        </ProtectRoute>
+                    }
+                />
             </Routes>
         </PhoneFrame>
     );

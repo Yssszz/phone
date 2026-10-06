@@ -3,6 +3,7 @@ import LiveClock from "../components/LiveClock";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { notifications } from "@mantine/notifications";
+import StatusBar from "../components/StatusBar";
 
 const wallpaper = "https://r2.fivemanage.com/NknkLh3xvdOyH6mjXyCTz/wallpaper.jpg";
 
@@ -11,6 +12,7 @@ const shadow = "0 2px 8px rgba(0,0,0,0.4)";
 export default function Register() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [display, setDisplay] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -35,6 +37,16 @@ export default function Register() {
                 position: "top-left",
                 title: "Register failed",
                 message: "Password Input Cannot be empty",
+                color: "red",
+            });
+        }
+
+        if (!display.trim()) {
+            setLoading(false);
+            return notifications.show({
+                position: "top-left",
+                title: "Register failed",
+                message: "Display Name cannot be empty",
                 color: "red",
             });
         }
@@ -66,7 +78,7 @@ export default function Register() {
             const res = await fetch("http://localhost:3000/users/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ username, display, password }),
             });
 
             const data = await res.json();
@@ -77,7 +89,7 @@ export default function Register() {
                 return notifications.show({
                     position: "top-left",
                     title: "Register failed",
-                    message: data,
+                    message: data.message,
                     color: "red",
                 });
             }
@@ -103,71 +115,75 @@ export default function Register() {
     };
 
     return (
-        <Stack gap={0} pos="relative" bgsz="cover" bgp="center" style={{ flex: 1, backgroundImage: `url(${wallpaper})` }}>
-            <Overlay color="#00143c" backgroundOpacity={0.35} blur={3} zIndex={0} />
+        <>
+            <StatusBar />
+            <Stack gap={0} pos="relative" bgsz="cover" bgp="center" style={{ flex: 1, backgroundImage: `url(${wallpaper})` }}>
+                <Overlay color="#00143c" backgroundOpacity={0.35} blur={3} zIndex={0} />
 
-            <Stack gap={0} pos="relative" align="center" justify="center" style={{ flex: 1 }}>
-                {/* Time and date */}
-                <Text fz={80} lh={1} style={{ textShadow: shadow }}>
-                    <LiveClock />
-                </Text>
-                <Text style={{ textShadow: shadow }}>
-                    <LiveClock format="dddd, MMMM D" />
-                </Text>
+                <Stack gap={0} pos="relative" align="center" justify="center" style={{ flex: 1 }}>
+                    {/* Time and date */}
+                    <Text fz={80} lh={1} style={{ textShadow: shadow }}>
+                        <LiveClock />
+                    </Text>
+                    <Text style={{ textShadow: shadow }}>
+                        <LiveClock format="dddd, MMMM D" />
+                    </Text>
 
-                {/* login page */}
+                    {/* login page */}
+                    <Group
+                        w="100%"
+                        maw={640}
+                        mt={15}
+                        style={{
+                            backgroundImage: "linear-gradient(to bottom, #6a7fd6, #4a60c2)",
+                            border: "1px solid rgba(255, 255, 255, 0.4)",
+                            borderRadius: 12,
+                            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
+                        }}
+                        justify="center"
+                        p={15}
+                    >
+                        <Stack align="center" gap={0} justify="center" p="lg" style={{ flex: 1 }}>
+                            <Text style={{ fontSize: 40, textShadow: shadow }}>Register</Text>
+                            <Text c="yellow">Create a new Account</Text>
+                        </Stack>
+
+                        <Divider orientation="vertical" color="rgba(255, 255, 255, 0.5)" size="sm" />
+
+                        <Stack w={280} justify="center">
+                            <Group justify="flex-start">
+                                <Avatar radius="sm" color="indigo" style={{ border: "1px solid white" }}>
+                                    {display ? display[0].toUpperCase() : "?"}
+                                </Avatar>
+                                <Text>{display || "Display Name"}</Text>
+                            </Group>
+                            <TextInput maxLength={10} placeholder="Username (For Login)" value={username} onChange={(e) => setUsername(e.currentTarget.value)} />
+                            <TextInput maxLength={20} placeholder="Display Name (For Display)" value={display} onChange={(e) => setDisplay(e.currentTarget.value)} />
+                            <PasswordInput maxLength={10} placeholder="Password" value={password} onChange={(e) => setPassword(e.currentTarget.value)} />
+                            <Button loading={loading} onClick={handleSubmit} variant="filled" size="md" style={{ backgroundImage: "linear-gradient(to bottom, #7FC658, #5FA73E)", border: "1px solid white" }}>
+                                Register
+                            </Button>
+                        </Stack>
+                    </Group>
+                </Stack>
+                {/* docker */}
                 <Group
-                    w="100%"
-                    maw={640}
-                    mt={15}
+                    justify="space-between"
+                    px="md"
+                    h={44}
+                    pos="relative"
                     style={{
-                        backgroundImage: "linear-gradient(to bottom, #6a7fd6, #4a60c2)",
-                        border: "1px solid rgba(255, 255, 255, 0.4)",
-                        borderRadius: 12,
+                        backgroundImage: "linear-gradient(to bottom, #586ec3, #2C4CAD)",
+                        borderTop: "2px solid rgba(255, 255, 255, 0.4)",
                         boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
                     }}
-                    justify="center"
-                    p={15}
                 >
-                    <Stack align="center" gap={0} justify="center" p="lg" style={{ flex: 1 }}>
-                        <Text style={{ fontSize: 40, textShadow: shadow }}>Register</Text>
-                        <Text c="yellow">Create a new Account</Text>
-                    </Stack>
-
-                    <Divider orientation="vertical" color="rgba(255, 255, 255, 0.5)" size="sm" />
-
-                    <Stack w={280} justify="center">
-                        <Group justify="flex-start">
-                            <Avatar radius="sm" color="indigo" style={{ border: "1px solid white" }}>
-                                {username ? username[0].toUpperCase() : "?"}
-                            </Avatar>
-                            <Text>{username || "Username"}</Text>
-                        </Group>
-                        <TextInput placeholder="Username" value={username} onChange={(e) => setUsername(e.currentTarget.value)} />
-                        <PasswordInput maxLength={10} placeholder="Password" value={password} onChange={(e) => setPassword(e.currentTarget.value)} />
-                        <Button loading={loading} onClick={handleSubmit} variant="filled" size="md" style={{ backgroundImage: "linear-gradient(to bottom, #7FC658, #5FA73E)", border: "1px solid white" }}>
-                            Register
-                        </Button>
-                    </Stack>
+                    <Anchor component={Link} to="/login" c="white">
+                        Already have an account ? Login
+                    </Anchor>
+                    <Text size="xs">Hello OS v1.0</Text>
                 </Group>
             </Stack>
-            {/* docker */}
-            <Group
-                justify="space-between"
-                px="md"
-                h={44}
-                pos="relative"
-                style={{
-                    backgroundImage: "linear-gradient(to bottom, #586ec3, #2C4CAD)",
-                    borderTop: "2px solid rgba(255, 255, 255, 0.4)",
-                    boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
-                }}
-            >
-                <Anchor component={Link} to="/login" c="white">
-                    Already have an account ? Login
-                </Anchor>
-                <Text size="xs">Hello OS v1.0</Text>
-            </Group>
-        </Stack>
+        </>
     );
 }
