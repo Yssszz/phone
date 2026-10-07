@@ -18,7 +18,7 @@ function PhoneFrame({ children }) {
                     width: isMobile ? 320 : 1020,
                     height: isMobile ? 568 : 650,
                     maxHeight: "90vh",
-                    overflow: "hidden",
+                    // overflow: "hidden",
                     display: "flex",
                     flexDirection: "column",
                     borderRadius: 5,

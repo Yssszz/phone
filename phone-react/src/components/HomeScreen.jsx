@@ -13,6 +13,7 @@ import Stocks from "../assets/Stocks.png";
 
 function HomeScreen({ onOpenApp }) {
     const isMobile = useMediaQuery("(max-width: 768px)");
+    const isAdmin = localStorage.getItem("role") === "admin";
 
     return (
         <SimpleGrid cols={isMobile ? 4 : 5} spacing="md" style={{ flex: 1, padding: 16, textAlign: "center", alignContent: "start" }}>
@@ -40,10 +41,13 @@ function HomeScreen({ onOpenApp }) {
                 <Image radius="md" h={60} w={60} src={Home} fallbackSrc="https://placehold.co/600x400?text=Placeholder" />
                 <Text>Home</Text>
             </Stack>
-            <Stack align="center" gap={4} className={styles.appIcon} onClick={() => onOpenApp("hacker")}>
-                <Image radius="md" h={60} w={60} src={Hacker} fallbackSrc="https://placehold.co/600x400?text=Placeholder" />
-                <Text>DarkWeb</Text>
-            </Stack>
+            {isAdmin && (
+                <Stack align="center" gap={4} className={styles.appIcon} onClick={() => onOpenApp("hacker")}>
+                    <Image radius="md" h={60} w={60} src={Hacker} fallbackSrc="https://placehold.co/600x400?text=Placeholder" />
+                    <Text>DarkWeb</Text>
+                </Stack>
+            )}
+
             <Stack align="center" gap={4} className={styles.appIcon} onClick={() => onOpenApp("stocks")}>
                 <Image radius="md" h={60} w={60} src={Stocks} fallbackSrc="https://placehold.co/600x400?text=Placeholder" />
                 <Text>Stocks</Text>

@@ -88,6 +88,7 @@ export default function Login() {
             localStorage.setItem("username", data.username);
             localStorage.setItem("display", data.display);
             localStorage.setItem("balance", data.balance);
+            localStorage.setItem("role", data.role);
 
             notifications.show({
                 position: "top-left",
