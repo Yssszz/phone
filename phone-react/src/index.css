@@ -3,12 +3,12 @@
 
 @font-face {
     font-family: "sf";
-    src: url(../src/assets/SF-Pro-Text-Bold.otf);
+    src: url(./assets/fonts/SF-Pro-Text-Bold.otf);
 }
 
 @font-face {
     font-family: "mc";
-    src: url(../src/assets/minecraft_font.ttf);
+    src: url(./assets/fonts/minecraft_font.ttf);
 }
 
 *,

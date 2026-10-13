@@ -1,7 +1,7 @@
-import { Stack, Text, Group, Avatar, Image, Badge, Card, Box, Center, NumberFormatter } from "@mantine/core";
-import AppStatus from "./AppStatus";
-import { useState } from "react";
-import { notifications } from "@mantine/notifications";
+import { API_URL } from "../config"; // get backend url
+import { Stack, SimpleGrid, Text, Group, Avatar, Image, Badge, Card, Box, Center, NumberFormatter } from "@mantine/core";
+import AppStatus from "../components/AppStatus";
+import { useState, useEffect } from "react";
 import { GiMoneyStack } from "react-icons/gi";
 
 const wallpaper = "https://r2.fivemanage.com/INqJLuvqvnMaDIlxPrNvZ/c4f92f36-9d9b-4abd-b10d-84d265e1edbe.png";
@@ -9,6 +9,21 @@ const wallpaper = "https://r2.fivemanage.com/INqJLuvqvnMaDIlxPrNvZ/c4f92f36-9d9b
 function Information({ onClose }) {
     const display = localStorage.getItem("display");
     const balance = localStorage.getItem("balance");
+
+    // 我买过的东西 一开始是空 array
+    const [assets, setAssets] = useState([]);
+
+    // when我开 Information 时去后端拿我的资产(只拿token)
+    useEffect(() => {
+        const getAssets = async () => {
+            const res = await fetch(`${API_URL}/assets`, {
+                headers: { Authorization: "Bearer " + localStorage.getItem("token") },
+            });
+            const data = await res.json();
+            if (res.ok) setAssets(data); // 成功才放进 state，画面重画
+        };
+        getAssets();
+    }, []); // [] = 只在打开时跑一次
 
     return (
         <Stack gap={0} style={{ flex: 1, background: "linear-gradient(to bottom, #2b2f36, #121418)" }}>
@@ -77,6 +92,39 @@ function Information({ onClose }) {
                         <NumberFormatter prefix="RM " value={balance} thousandSeparator />
                     </Text>
                 </Card>
+
+                <Text w={330} fw={700} c="dimmed" fz="sm" style={{ letterSpacing: 1.5 }}>
+                    MY ASSETS
+                </Text>
+
+                {/* dont buy anything */}
+                {assets.length === 0 && (
+                    <Text w={330} c="dimmed" fz="sm">
+                        You have not bought anything yet.
+                    </Text>
+                )}
+
+                {/* 买过的东西：SimpleGrid cols={3} = 一排 3 个，超过自动换行 */}
+                <SimpleGrid cols={3} spacing="xs" w={330}>
+                    {assets.map((asset) => (
+                        <Card key={asset._id} radius="md" p="xs" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)" }}>
+                            <Image src={asset.image} h={60} radius="sm" fit="cover" fallbackSrc="https://placehold.co/200x120?text=No+Image" />
+
+
+                            <Text fw={700} c="white" fz={11} mt={4} truncate>
+                                {asset.name}
+                            </Text>
+
+                            <Badge variant="outline" color="gray" size="xs" mt={2}>
+                                {asset.category}
+                            </Badge>
+
+                            <Text fw={700} c="#7FC658" fz={11} mt={2}>
+                                <NumberFormatter prefix="RM " value={asset.price} thousandSeparator />
+                            </Text>
+                        </Card>
+                    ))}
+                </SimpleGrid>
             </Stack>
         </Stack>
     );

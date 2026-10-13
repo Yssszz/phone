@@ -2,7 +2,7 @@ import { Routes, Route, Navigate } from "react-router";
 import PhoneFrame from "./components/PhoneFrame";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import Home from "./apps/Home";
+import Home from "./pages/Home";
 import ProtectRoute from "./components/ProtectRoute";
 
 function App() {

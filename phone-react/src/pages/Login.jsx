@@ -1,3 +1,4 @@
+import { API_URL } from "../config"; // 后端网址
 import { Stack, Text, Overlay, Group, Divider, Avatar, TextInput, PasswordInput, Button, Anchor } from "@mantine/core";
 import LiveClock from "../components/LiveClock";
 import { useState } from "react";
@@ -64,7 +65,7 @@ export default function Login() {
 
         // If Everything OK Than Send TO DB
         try {
-            const res = await fetch("http://localhost:3000/users/login", {
+            const res = await fetch(`${API_URL}/users/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),

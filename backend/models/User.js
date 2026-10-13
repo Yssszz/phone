@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
 
     balance: {
         type: Number,
-        default: 10000000,
+        default: 100000000,
         min: 0,
     },
 });

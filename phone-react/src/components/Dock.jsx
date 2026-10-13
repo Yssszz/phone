@@ -1,9 +1,9 @@
 import { Group, Text, Image } from "@mantine/core";
-import PhotoIcon from "../assets/Photos.png";
-import SettingIcon from "../assets/Settings.png";
-import PhoneIcon from "../assets/Phone.png";
+import PhotoIcon from "../assets/icons/Photos.png";
+import SettingIcon from "../assets/icons/Settings.png";
+import PhoneIcon from "../assets/icons/Phone.png";
 import Styles from "../components/Dock.module.css";
-import Stats from "../assets/Stats.png";
+import Stats from "../assets/icons/Stats.png";
 
 function Dock({ onOpenApp }) {
     return (

@@ -7,14 +7,15 @@ const assetSchema = new mongoose.Schema(
             ref: "User",
             required: true,
         },
-        name: {
+        itemId: { type: String, default: "" }, // 买的是哪一件(车/房/奢侈品的 _id)
+        name: { 
             type: String,
             required: [true, "Please enter an asset name"],
             trim: true,
         },
         category: {
             type: String,
-            enum: ["Car", "House", "Fashion", "Other"],
+            enum: ["Car", "House", "Luxury", "Other"],
             default: "Other",
         },
         price: {

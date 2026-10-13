@@ -1,6 +1,7 @@
+import { API_URL } from "../config"; // 后端网址
 import { Stack, TextInput, PasswordInput, Button, Card, Text } from "@mantine/core";
 import { IconUser, IconId, IconLock } from "@tabler/icons-react";
-import AppStatus from "./AppStatus";
+import AppStatus from "../components/AppStatus";
 import { useNavigate } from "react-router";
 import { notifications } from "@mantine/notifications";
 import { useState } from "react";
@@ -40,7 +41,7 @@ export default function Setting({ onClose }) {
 
         try {
             // ② 带着手环送 DELETE
-            const res = await fetch("http://localhost:3000/users/me", {
+            const res = await fetch(`${API_URL}/users/me`, {
                 method: "DELETE",
                 headers: {
                     Authorization: "Bearer " + localStorage.getItem("token"),
@@ -102,7 +103,7 @@ export default function Setting({ onClose }) {
 
         try {
             // ③ 送去后端
-            const res = await fetch("http://localhost:3000/users/me", {
+            const res = await fetch(`${API_URL}/users/me`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -152,7 +153,7 @@ export default function Setting({ onClose }) {
         }
 
         try {
-            const res = await fetch("http://localhost:3000/users/me", {
+            const res = await fetch(`${API_URL}/users/me`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
