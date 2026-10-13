@@ -6,6 +6,7 @@ import Stats from "../assets/icons/Stats.png";
 import Veh from "../assets/icons/Veh.png";
 import Home from "../assets/icons/Home.png";
 import Dating from "../assets/icons/dating.png";
+import Luxury from "../assets/icons/Luxury.png";
 
 function HomeScreen({ onOpenApp }) {
     const isMobile = useMediaQuery("(max-width: 768px)");
@@ -18,9 +19,7 @@ function HomeScreen({ onOpenApp }) {
                 <Text>Information</Text>
             </Stack>
             <Stack align="center" gap={4} className={styles.appIcon} onClick={() => onOpenApp("luxury")}>
-                <Center h={60} w={60} style={{ borderRadius: 12, background: "linear-gradient(to bottom, #f6d365, #c9971c)" }}>
-                    <MdDiamond size={34} color="white" />
-                </Center>
+                <Image radius="md" h={60} w={60} src={Luxury} fallbackSrc="https://placehold.co/600x400?text=Placeholder" />
                 <Text>Luxury</Text>
             </Stack>
             <Stack align="center" gap={4} className={styles.appIcon} onClick={() => onOpenApp("vehicle")}>
@@ -43,7 +42,7 @@ function HomeScreen({ onOpenApp }) {
                     </Center>
                     <Text>Admin</Text>
                 </Stack>
-            )}  
+            )}
         </SimpleGrid>
     );
 }
