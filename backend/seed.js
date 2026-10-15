@@ -58,12 +58,12 @@ const home = [
 ];
 
 const luxury = [
-    { name: "Rolex Submariner", price: 60000, image: "" },
-    { name: "Patek Philippe Nautilus", price: 450000, image: "" },
-    { name: "Cartier Love Bracelet", price: 25000, image: "" },
-    { name: "Hermes Birkin 25", price: 80000, image: "" },
-    { name: "Sunseeker 76 Yacht", price: 8000000, image: "" },
-    { name: "Gulfstream G700 Jet", price: 80000000, image: "" },
+    { name: "Rolex Submariner", price: 60000, image: "https://res.cloudinary.com/storage-41watch/image/upload/v1728905693/sub_6536_e4684a717e.jpg" },
+    { name: "Patek Philippe Nautilus", price: 450000, image: "https://www.cortinawatch.com/my/wp-content/uploads/sites/2/2026/04/Patek-Philippe_Nautilus_Cortina-Watch-collection-page.webp" },
+    { name: "Cartier Love Bracelet", price: 25000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYtr9rjNRiGPKWhxrAYhICwzXIvuMfgVe6OMwE5wTzH31wsMj7XFUrmBo&s=10" },
+    { name: "Hermes Birkin 25", price: 80000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHpjDxQDIfp5ZUSNk1smoR6RmZwxVGcjimg9JuhTEDxej5qfZ6PBTnY5BW&s=10" },
+    { name: "Sunseeker 76 Yacht", price: 8000000, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSshnQ7Vzc1YZ9I2NXx-GMca5emlAJCRlflPCLXzJVM1j09ddbekydM60&s=10" },
+    { name: "Gulfstream G700 Jet", price: 80000000, image: "https://www.gulfstream.com/assets/images/aircraft/g700/d_g700_a_mkt_00041_v02_webPROD.jpg" },
 ];
 
 const seed = async () => {
@@ -111,7 +111,7 @@ const seed = async () => {
                 password: hashedPassword,
             });
         }
-        console.log("User seed:", "2")
+        console.log("User seed:", "2");
     } finally {
         await mongoose.disconnect();
     }

@@ -94,7 +94,6 @@ router.delete("/:id", auth, admin, async (req, res) => {
         const home = await Home.findByIdAndDelete(req.params.id);
 
         if (!home) {
-            // 改:加了 return,并且状态码改成 404
             return res.status(404).json({ message: "Home not found" });
         }
 

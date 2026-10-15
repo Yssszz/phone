@@ -7,7 +7,7 @@ export async function buyItem(type, id) {
     const res = await fetch(`${API_URL}/assets/buy`, {
         method: "POST",
         headers: {
-            "Content-Type": "application/json", // 有 body，要说是 JSON
+            "Content-Type": "application/json",
             Authorization: "Bearer " + localStorage.getItem("token"), // 带 token，后端才知道是谁买
         },
         body: JSON.stringify({ type, id }), // 只传种类和 id，价钱后端自己查(防止被改)
@@ -15,7 +15,7 @@ export async function buyItem(type, id) {
 
     const data = await res.json();
 
-    // 后端拒绝(钱不够...)：弹红色提示 + 后端给的原因
+    // 后端拒绝(钱不够)：弹notify + 原因
     if (!res.ok) {
         return notifications.show({ position: "top-left", title: "Purchase failed", message: data.message, color: "red" });
     }

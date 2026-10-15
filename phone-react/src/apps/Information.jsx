@@ -23,7 +23,7 @@ function Information({ onClose }) {
             if (res.ok) setAssets(data); // 成功才放进 state，画面重画
         };
         getAssets();
-    }, []); // [] = 只在打开时跑一次
+    }, []); //
 
     return (
         <Stack gap={0} style={{ flex: 1, background: "linear-gradient(to bottom, #2b2f36, #121418)" }}>
@@ -104,12 +104,10 @@ function Information({ onClose }) {
                     </Text>
                 )}
 
-                {/* 买过的东西：SimpleGrid cols={3} = 一排 3 个，超过自动换行 */}
                 <SimpleGrid cols={3} spacing="xs" w={330}>
                     {assets.map((asset) => (
                         <Card key={asset._id} radius="md" p="xs" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.15)" }}>
                             <Image src={asset.image} h={60} radius="sm" fit="cover" fallbackSrc="https://placehold.co/200x120?text=No+Image" />
-
 
                             <Text fw={700} c="white" fz={11} mt={4} truncate>
                                 {asset.name}

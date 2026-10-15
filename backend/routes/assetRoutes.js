@@ -9,7 +9,6 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 
 // 买东西：POST /assets/buy，body 只传 { type, id }
-// 价钱不让前端传，一定要后端自己去数据库查，不然别人可以改成 RM 0 买
 router.post("/buy", auth, async (req, res) => {
     try {
         const { type, id } = req.body; // type = "Car" / "House" / "Luxury"，id = 那件东西的 _id

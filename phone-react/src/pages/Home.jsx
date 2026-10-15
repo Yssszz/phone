@@ -8,7 +8,6 @@ import Setting from "../apps/Setting";
 import HouseApp from "../apps/HouseApp";
 import DatingApp from "../apps/DatingApp";
 import LuxuryApp from "../apps/LuxuryApp";
-import AdminDashboard from "../apps/AdminDashboard";
 
 export default function Home() {
     const [activeApp, setActiveApp] = useState(null);
@@ -21,12 +20,11 @@ export default function Home() {
     if (activeApp === "house") return <HouseApp onClose={closeApp} />;
     if (activeApp === "dating") return <DatingApp onClose={closeApp} />;
     if (activeApp === "luxury") return <LuxuryApp onClose={closeApp} />;
-    if (activeApp === "admin") return <AdminDashboard onClose={closeApp} />;
 
     return (
         <>
             <StatusBar />
-            <HomeScreen onOpenApp={setActiveApp} />
+            <HomeScreen onOpenApp={setActiveApp} />  
             <Dock onOpenApp={setActiveApp} />
         </>
     );
