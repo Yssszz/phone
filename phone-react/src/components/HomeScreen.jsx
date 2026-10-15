@@ -5,7 +5,7 @@ import Stats from "../assets/icons/Stats.png";
 import Veh from "../assets/icons/Veh.png";
 import Home from "../assets/icons/Home.png";
 import Dating from "../assets/icons/dating.png";
-import Luxury from "../assets/icons/Luxury.png";
+import Luxury from "../assets/icons/luxury.png";
 
 function HomeScreen({ onOpenApp }) {
     const isMobile = useMediaQuery("(max-width: 768px)");
